@@ -1,0 +1,1 @@
+# skywars-loot-tracker
