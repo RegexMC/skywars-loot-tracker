@@ -1,0 +1,16 @@
+[
+{
+  "modid": "skywarsloottracker",
+  "name": "Skywars Loot Tracker",
+  "description": "Track all items found in chests while playing Hypixel Skywars.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Regex"],
+  "credits": "Someone that was whinging about their bad rng and how hypixel simply hates only them for the idea",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
