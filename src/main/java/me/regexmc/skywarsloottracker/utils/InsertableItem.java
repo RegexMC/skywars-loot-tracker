@@ -1,4 +1,4 @@
-package me.regexmc.skywarsloottracker;
+package me.regexmc.skywarsloottracker.utils;
 
 public class InsertableItem {
     private final String id;

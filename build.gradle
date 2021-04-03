@@ -89,8 +89,7 @@ runClient.dependsOn(build)
 runClient.dependsOn(runClientFix)
 
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
