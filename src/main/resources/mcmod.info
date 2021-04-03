@@ -4,11 +4,11 @@
   "name": "Skywars Loot Tracker",
   "description": "Track all items found in chests while playing Hypixel Skywars.",
   "version": "1.0",
-  "mcversion": "${mcversion},
+  "mcversion": "${mcversion}",
   "url": "https://github.com/regexmc/skywars-loot-tracker/",
   "updateUrl": "",
   "authorList": ["Regex"],
-  "credits": "LLamaLad7 for helping with mixins as well as Moulberry's code.",
+  "credits": "LLamaLad7 for helping with mixins\nSk1erLLC's Hytilities for the Locraw utils\nMoulberry's BetterScaledGUI's code that I used for mixin reference.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

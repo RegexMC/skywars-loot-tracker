@@ -1,8 +1,10 @@
 package me.regexmc.skywarsloottracker.mixins;
 
 import me.regexmc.skywarsloottracker.SkywarsLootTracker;
+import me.regexmc.skywarsloottracker.handlers.GameType;
 import me.regexmc.skywarsloottracker.utils.InsertableItem;
 import me.regexmc.skywarsloottracker.utils.ItemCategory;
+import me.regexmc.skywarsloottracker.utils.locraw.LocrawInformation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,17 +37,20 @@ public class MixinNetHandlerPlayClient {
                                 final InventoryPlayer inventory = p.inventory;
                                 if (inventory != null) {
                                     if (itemStacks.length == 63) {
-                                        for (int i = 0; i <= 26; i++) { // i <= 26 is chest items
-                                            final ItemStack item = itemStacks[i];
-                                            if (item != null) {
-                                                SkywarsLootTracker.dataManager.writeItem(
-                                                        new InsertableItem(
-                                                                String.valueOf(Item.getIdFromItem(item.getItem())),
-                                                                String.valueOf(item.stackSize),
-                                                                item.getItem().getUnlocalizedName(),
-                                                                ItemCategory.fromItemStack(item)
-                                                        )
-                                                );
+                                        LocrawInformation locraw = SkywarsLootTracker.INSTANCE.getLocrawUtil().getLocrawInformation();
+                                        if (locraw != null && GameType.SKY_WARS.equals(locraw.getGameType())) {
+                                            for (int i = 0; i <= 26; i++) { // i <= 26 is chest items
+                                                final ItemStack item = itemStacks[i];
+                                                if (item != null) {
+                                                    SkywarsLootTracker.dataManager.writeItem(
+                                                            new InsertableItem(
+                                                                    String.valueOf(Item.getIdFromItem(item.getItem())),
+                                                                    String.valueOf(item.stackSize),
+                                                                    item.getItem().getUnlocalizedName(),
+                                                                    ItemCategory.fromItemStack(item)
+                                                            )
+                                                    );
+                                                }
                                             }
                                         }
                                     }

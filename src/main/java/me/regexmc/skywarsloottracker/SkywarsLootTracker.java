@@ -3,8 +3,10 @@ package me.regexmc.skywarsloottracker;
 import me.regexmc.skywarsloottracker.commands.SkywarsLootTrackerCommand;
 import me.regexmc.skywarsloottracker.handlers.ConfigManager;
 import me.regexmc.skywarsloottracker.handlers.DataManager;
+import me.regexmc.skywarsloottracker.utils.locraw.LocrawUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -17,9 +19,12 @@ public class SkywarsLootTracker {
     public static final String MODID = "skywarsloottracker";
     public static final String VERSION = "1.0";
 
+    @Mod.Instance(MODID)
+    public static SkywarsLootTracker INSTANCE;
     public static Minecraft mc;
     public static ConfigManager configManager;
     public static DataManager dataManager;
+    private final LocrawUtil locrawUtil = new LocrawUtil();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -27,6 +32,7 @@ public class SkywarsLootTracker {
         dataManager = new DataManager();
         mc = Minecraft.getMinecraft();
         ClientCommandHandler.instance.registerCommand(new SkywarsLootTrackerCommand());
+        MinecraftForge.EVENT_BUS.register(locrawUtil);
 
         File configDir = new File(event.getModConfigurationDirectory(), "skywarsloottracker");
         configDir.mkdirs();
@@ -49,5 +55,9 @@ public class SkywarsLootTracker {
                 mc.shutdown();
             }
         }
+    }
+
+    public LocrawUtil getLocrawUtil() {
+        return locrawUtil;
     }
 }
