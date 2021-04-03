@@ -4,8 +4,6 @@
 
 </div>
 
-*Currently does not limit to skywars and will track all chests*
-
 *Opening the same chest twice will cause it to log the items twice.*
 
 ## Usage
