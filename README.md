@@ -15,5 +15,12 @@ To toggle it on or off, run `/skywarsloottracker toggle`, and to export the data
 
 **Please note that if you run out of space on your drive while using this mod it may wipe the output file.**
 
+## Credits
+[@LLamaLad7](https://github.com/LlamaLad7) For helping me get past the first hurdle of setting up mixins.
+
+[@Sk1erLLC's](https://github.com/Sk1erLLC) [Hytilities](https://github.com/Sk1erLLC/Hytilities/) for the LocrawUtil and LocrawInformation classes.
+
+[@Moulberry's](https://github.com/moulberry) [BetterScaledGUI](https://github.com/moulberry/BetterScaledGUI/) For referencing his implementation of mixins.
+
 ---
 *[License](https://github.com/RegexMC/skywars-loot-tracker/blob/main/LICENSE)*
