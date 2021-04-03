@@ -2,6 +2,8 @@
 
 *Currently does not limit to skywars and will track all chests*
 
+*Opening the same chest twice will cause it to log the items twice.*
+
 ## Usage
 Download latest release from [the releases page](https://github.com/RegexMC/skywars-loot-tracker/releases) and add the mod to your mod folder.
 

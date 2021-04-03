@@ -26,6 +26,7 @@ public class DataManager {
                 itemObject = new JSONObject();
                 itemObject.put("count", record.getCount());
                 itemObject.put("name", record.getName());
+                itemObject.put("category", record.getCategory().toString());
                 dataObject.put(record.getId(), itemObject);
             } else {
                 itemObject.replace("count", String.valueOf(Integer.parseInt((String) itemObject.get("count")) + Integer.parseInt(record.getCount())));
@@ -52,13 +53,14 @@ public class DataManager {
             JSONObject data = (JSONObject) new JSONParser().parse(reader);
 
             FileWriter writer = new FileWriter(outputFile);
-            writer.write("Id,Count,Name\n");
+            writer.write("Id,Count,Name,Category\n");
             for (Object key : data.keySet()) {
                 JSONObject itemData = (JSONObject) data.get(key);
                 final String Id = (String) key;
                 final String Count = (String) itemData.get("count");
                 final String Name = (String) itemData.get("name");
-                writer.write(Id + "," + Count + "," + Name + "\n");
+                final String Category = (String) itemData.get("category");
+                writer.write(Id + "," + Count + "," + Name + "," + Category + "\n");
             }
 
             writer.close();

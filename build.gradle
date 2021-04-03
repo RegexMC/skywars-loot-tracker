@@ -5,16 +5,16 @@ buildscript {
         maven { url = "https://repo.spongepowered.org/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
-        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
-        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
+        classpath "org.spongepowered:mixingradle:0.6-SNAPSHOT"
+        classpath "com.github.jengelman.gradle.plugins:shadow:4.0.4"
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "java"
+apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: "org.spongepowered.mixin"
+apply plugin: "com.github.johnrengelman.shadow"
 
 sourceCompatibility = targetCompatibility = 1.8
 
@@ -30,14 +30,14 @@ minecraft {
 
 repositories {
     jcenter()
-    maven { url 'https://repo.spongepowered.org/maven/' }
+    maven { url "https://repo.spongepowered.org/maven/" }
     flatDir {
-        dirs 'deps'
+        dirs "deps"
     }
 }
 
 dependencies {
-    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    compile "org.spongepowered:mixin:0.7.11-SNAPSHOT"
     compile "com.googlecode.json-simple:json-simple:1.1.1"
 }
 
@@ -47,28 +47,29 @@ mixin {
 
 jar {
     manifest.attributes(
-            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-            'MixinConfigs': "mixins.skywarsloottracker.json",
-            'FMLCorePluginContainsFMLMod': true,
+            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+            "MixinConfigs": "mixins.skywarsloottracker.json",
+            "FMLCorePluginContainsFMLMod": true,
             "ForceLoadAsMod": true
     )
 }
 
 shadowJar {
     dependencies {
-        include(dependency('org.spongepowered:mixin:0.7.11-SNAPSHOT'))
+        include(dependency("org.spongepowered:mixin:0.7.11-SNAPSHOT"))
+        include(dependency("com.googlecode.json-simple:json-simple:1.1.1"))
     }
 
-    exclude 'module-info.class'
-    exclude 'dummyThing'
-    exclude 'LICENSE.txt'
+    exclude "module-info.class"
+    exclude "dummyThing"
+    exclude "LICENSE.txt"
 
     classifier = "dep"
 }
 
 reobf {
     shadowJar {
-        mappingType = 'SEARGE'
+        mappingType = "SEARGE"
     }
 }
 
@@ -94,11 +95,11 @@ processResources {
     inputs.property "mcversion", project.minecraft.version
 
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version': project.version, 'mcversion': project.minecraft.version
+        include "mcmod.info"
+        expand "version": project.version, "mcversion": project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude "mcmod.info"
     }
 }
