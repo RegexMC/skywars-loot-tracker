@@ -24,32 +24,34 @@ public class MixinNetHandlerPlayClient {
 
     @Inject(method = "handleWindowItems", at = @At(value = "HEAD"))
     private void handleSetSlot(S30PacketWindowItems packetIn, CallbackInfo ci) {
-        if (SkywarsLootTracker.configManager.enabled) {
-            x = !x;
-            if (x) {
-                if (packetIn != null) {
-                    final ItemStack[] itemStacks = packetIn.getItemStacks();
-                    if (itemStacks != null) {
-                        final Minecraft mc = SkywarsLootTracker.mc;
-                        if (mc != null) {
-                            final EntityPlayer p = mc.thePlayer;
-                            if (p != null) {
-                                final InventoryPlayer inventory = p.inventory;
-                                if (inventory != null) {
-                                    if (itemStacks.length == 63) {
-                                        LocrawInformation locraw = SkywarsLootTracker.INSTANCE.getLocrawUtil().getLocrawInformation();
-                                        if (locraw != null && GameType.SKY_WARS.equals(locraw.getGameType())) {
-                                            for (int i = 0; i <= 26; i++) { // i <= 26 is chest items
-                                                final ItemStack item = itemStacks[i];
-                                                if (item != null) {
-                                                    SkywarsLootTracker.dataManager.writeItem(
-                                                            new InsertableItem(
-                                                                    String.valueOf(Item.getIdFromItem(item.getItem())),
-                                                                    String.valueOf(item.stackSize),
-                                                                    item.getItem().getUnlocalizedName(),
-                                                                    ItemCategory.fromItemStack(item)
-                                                            )
-                                                    );
+        try {
+            if (SkywarsLootTracker.configManager.enabled) {
+                x = !x;
+                if (x) {
+                    if (packetIn != null) {
+                        final ItemStack[] itemStacks = packetIn.getItemStacks();
+                        if (itemStacks != null) {
+                            final Minecraft mc = SkywarsLootTracker.mc;
+                            if (mc != null) {
+                                final EntityPlayer p = mc.thePlayer;
+                                if (p != null) {
+                                    final InventoryPlayer inventory = p.inventory;
+                                    if (inventory != null) {
+                                        if (itemStacks.length == 63) {
+                                            LocrawInformation locraw = SkywarsLootTracker.INSTANCE.getLocrawUtil().getLocrawInformation();
+                                            if (locraw != null && GameType.SKY_WARS.equals(locraw.getGameType())) {
+                                                for (int i = 0; i <= 26; i++) { // i <= 26 is chest items
+                                                    final ItemStack item = itemStacks[i];
+                                                    if (item != null) {
+                                                        SkywarsLootTracker.dataManager.writeItem(
+                                                                new InsertableItem(
+                                                                        String.valueOf(Item.getIdFromItem(item.getItem())),
+                                                                        String.valueOf(item.stackSize),
+                                                                        item.getItem().getUnlocalizedName(),
+                                                                        ItemCategory.fromItemStack(item)
+                                                                )
+                                                        );
+                                                    }
                                                 }
                                             }
                                         }
@@ -60,6 +62,6 @@ public class MixinNetHandlerPlayClient {
                     }
                 }
             }
-        }
+        } catch (Exception e) {}
     }
 }
